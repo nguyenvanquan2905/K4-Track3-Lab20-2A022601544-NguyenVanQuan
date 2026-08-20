@@ -1,0 +1,76 @@
+{
+  "request": {
+    "query": "Research GraphRAG state-of-the-art and write a 500-word summary",
+    "max_sources": 5,
+    "audience": "technical learners"
+  },
+  "iteration": 0,
+  "route_history": [],
+  "sources": [
+    {
+      "title": "AI Agents for Scientific Literature Research",
+      "url": "file:///D:/AI_THUCCHIEN/K4-Track3-Lab20-2A022601544-NguyenVanQuan/ai_agent_offline_research_corpus_v2/topics/18_ai_agents_for_scientific_literature_research.json",
+      "snippet": "How should a multi-agent system conduct a scientific literature review while preserving citation fidelity, uncertainty, and methodological nuance? Scientific research agents need source-aware division of labor, claim-level provenance, method-quality assessment, and explicit handling of contradictory findings.",
+      "metadata": {
+        "source": "offline_corpus",
+        "path": "ai_agent_offline_research_corpus_v2\\topics\\18_ai_agents_for_scientific_literature_research.json",
+        "score": 8
+      }
+    },
+    {
+      "title": "Autonomous Data Analysis Agents",
+      "url": "file:///D:/AI_THUCCHIEN/K4-Track3-Lab20-2A022601544-NguyenVanQuan/ai_agent_offline_research_corpus_v2/topics/19_autonomous_data_analysis_agents.json",
+      "snippet": "How should agents combine code execution, data profiling, statistical checks, visualization, and narrative synthesis in a trustworthy analysis workflow? The strongest design separates hypothesis generation from executable analysis and requires the narrative agent to cite computed artifacts rather than infer results from natural-language guesses.",
+      "metadata": {
+        "source": "offline_corpus",
+        "path": "ai_agent_offline_research_corpus_v2\\topics\\19_autonomous_data_analysis_agents.json",
+        "score": 8
+      }
+    },
+    {
+      "title": "Benchmarks and Metrics for Evaluating AI Agents",
+      "url": "file:///D:/AI_THUCCHIEN/K4-Track3-Lab20-2A022601544-NguyenVanQuan/ai_agent_offline_research_corpus_v2/topics/27_benchmarks_and_metrics_for_evaluating_ai_agents.json",
+      "snippet": "Which metrics best capture agent quality beyond final-answer accuracy, especially for long-horizon and multi-agent workflows? A credible evaluation should combine task success with process measures such as tool correctness, citation fidelity, recovery, cost, latency, policy compliance, and reproducibility.",
+      "metadata": {
+        "source": "offline_corpus",
+        "path": "ai_agent_offline_research_corpus_v2\\topics\\27_benchmarks_and_metrics_for_evaluating_ai_agents.json",
+        "score": 8
+      }
+    },
+    {
+      "title": "Cascading Hallucinations in Multi-Agent Pipelines",
+      "url": "file:///D:/AI_THUCCHIEN/K4-Track3-Lab20-2A022601544-NguyenVanQuan/ai_agent_offline_research_corpus_v2/topics/13_cascading_hallucinations_in_multi_agent_pipelines.json",
+      "snippet": "Why can multi-agent chains amplify fabricated facts, and which architectural controls reduce error propagation? Multi-agent composition can turn an early unsupported claim into shared context and apparent consensus; provenance tracking and mandatory re-verification at handoffs are key mitigations.",
+      "metadata": {
+        "source": "offline_corpus",
+        "path": "ai_agent_offline_research_corpus_v2\\topics\\13_cascading_hallucinations_in_multi_agent_pipelines.json",
+        "score": 8
+      }
+    },
+    {
+      "title": "Centralized Orchestrators vs Decentralized Agent Coordination",
+      "url": "file:///D:/AI_THUCCHIEN/K4-Track3-Lab20-2A022601544-NguyenVanQuan/ai_agent_offline_research_corpus_v2/topics/03_centralized_orchestrators_vs_decentralized_agent_coordination.json",
+      "snippet": "What are the trade-offs between a central supervisor agent and decentralized peer-to-peer coordination for long research workflows? Central orchestration simplifies global state and accountability, while decentralized designs can improve resilience and parallelism but require stronger protocols for consensus and conflict handling.",
+      "metadata": {
+        "source": "offline_corpus",
+        "path": "ai_agent_offline_research_corpus_v2\\topics\\03_centralized_orchestrators_vs_decentralized_agent_coordination.json",
+        "score": 8
+      }
+    }
+  ],
+  "research_notes": null,
+  "analysis_notes": null,
+  "final_answer": "### Overview of State-of-the-Art GraphRAG\n\nGraph Retrieval-Augmented Generation (GraphRAG) represents a major paradigm shift in AI-driven search and reasoning. While conventional vector-based RAG excels at retrieving localized text snippets for targeted queries, it struggles with global queries requiring dataset-wide synthesis, multi-hop relational reasoning, or cross-document summarization. State-of-the-art (SOTA) GraphRAG resolves these limitations by converting unstructured text into structured Knowledge Graphs (KGs) and hierarchical community representations.\n\n---\n\n### Architectural Foundations and Hierarchical Indexing\n\nThe foundational SOTA GraphRAG architecture uses LLMs to perform automated entity, relation, and claim extraction across unstructured text corpora. The extracted graph topology undergoes hierarchical clustering via algorithms such as Leiden to partition related entities into multi-tier communities. Generating pre-summarized representations at each community level enables dual retrieval strategies:\n\n1. **Global Search:** Aggregates macro-level community summaries to answer thematic, corpus-wide questions.\n2. **Local Search:** Combines dense vector retrieval with graph neighborhood traversal to answer entity-centric, multi-hop queries.\n\n---\n\n### Agentic Workflows and Orchestration\n\nRecent SOTA developments combine GraphRAG with multi-agent orchestration. A central supervisor agent typically manages state tracking and task decomposition, while specialized sub-agents perform sub-query routing, graph expansion, and narrative synthesis [2][5]. Decentralized peer agents can also parallelize graph construction and claim verification [1][5]. \n\nHowever, multi-step graph traversal creates risk for cascading hallucinations, where early extraction errors or unverified relationship edges propagate across the reasoning pipeline [4]. To prevent error amplification, SOTA frameworks implement architectural controls such as:\n* **Claim-Level Provenance:** Explicitly linking extracted facts back to source text segments [1].\n* **Mandatory Handoff Verification:** Re-verifying relational edges and sub-graph outputs prior to downstream synthesis [4].\n* **Artifact Citing:** Mandating that the synthesis agent cite retrieved graph artifacts rather than infer ungrounded conclusions [2].\n\n---\n\n### Efficiency and Next-Generation Frameworks\n\nA major bottleneck of initial GraphRAG implementations was the high computational overhead and token cost of initial graph construction. Next-generation systems (e.g., LightRAG, Fast GraphRAG) address this through:\n* **Dual-Level Retrieval:** Combining low-level entity context with high-level concept mappings without exhaustive community generation.\n* **Incremental & Dynamic Indexing:** Updating sub-graphs in real time as new documents arrive without requiring full graph re-indexing.\n* **Lightweight Entity Extraction:** Reducing token consumption while preserving graph density and search precision.\n\n---\n\n### Benchmarking and Evaluation\n\nEvaluating GraphRAG goes beyond measuring top-line answer accuracy. Comprehensive SOTA evaluation frameworks combine end-task accuracy with multi-dimensional process metrics [3]:\n* **Citation Fidelity & Provenance:** Verifying that generated claims trace directly to verified sub-graphs and original sources [1][3].\n* **Process Measures:** Measuring tool execution correctness, sub-graph traversal accuracy, recovery rates, token cost, and query latency [3].\n* **Methodological Rigor:** Assessing handling of contradictory findings across connected nodes [1].\n\n---\n\n### Conclusion\n\nSOTA GraphRAG bridges neural vector search and structured symbolic reasoning. By integrating multi-agent orchestration [5], claim provenance [1], verification protocols [4], and rigorous evaluation benchmarks [3], GraphRAG establishes a scalable foundation for transparent and trustworthy enterprise AI systems.",
+  "agent_results": [],
+  "trace": [
+    {
+      "name": "usage",
+      "payload": {
+        "input_tokens": 361,
+        "output_tokens": 747,
+        "cost_usd": null
+      }
+    }
+  ],
+  "errors": []
+}

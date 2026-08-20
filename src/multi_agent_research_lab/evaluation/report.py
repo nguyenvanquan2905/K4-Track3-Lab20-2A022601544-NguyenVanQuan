@@ -4,10 +4,7 @@ from multi_agent_research_lab.core.schemas import BenchmarkMetrics
 
 
 def render_markdown_report(metrics: list[BenchmarkMetrics]) -> str:
-    """Render benchmark metrics to markdown.
-
-    TODO(student): Add richer analysis, examples, screenshots, and trace links.
-    """
+    """Render metrics and a concise trade-off analysis to Markdown."""
 
     lines = [
         "# Benchmark Report",
@@ -23,5 +20,26 @@ def render_markdown_report(metrics: list[BenchmarkMetrics]) -> str:
         lines.append(
             f"| {item.run_name} | {item.latency_seconds:.2f} | {cost} | {quality} "
             f"| {citation} | {failure} | {item.notes} |"
+        )
+    if len(metrics) >= 2:
+        fastest = min(metrics, key=lambda item: item.latency_seconds)
+        best = max(metrics, key=lambda item: item.quality_score or 0.0)
+        lines.extend(
+            [
+                "",
+                "## Analysis",
+                "",
+                f"- Fastest run: **{fastest.run_name}** ({fastest.latency_seconds:.2f}s).",
+                f"- Highest quality proxy: **{best.run_name}** ({best.quality_score or 0:.1f}/10).",
+                "- Quality is an offline heuristic; add peer-review scores for submission.",
+                "- Multi-agent adds handoff/token overhead; use it when decomposition or "
+                "independent verification creates measurable value.",
+                "",
+                "## Failure mode and mitigation",
+                "",
+                "An unsupported claim can propagate through shared state and look like consensus. "
+                "Keep source IDs at handoffs, validate citations, cap iterations, and inspect "
+                "the JSON traces before accepting the final answer.",
+            ]
         )
     return "\n".join(lines) + "\n"

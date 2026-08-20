@@ -1,7 +1,6 @@
 """Optional critic agent skeleton for bonus work."""
 
 from multi_agent_research_lab.agents.base import BaseAgent
-from multi_agent_research_lab.core.errors import StudentTodoError
 from multi_agent_research_lab.core.state import ResearchState
 
 
@@ -11,9 +10,19 @@ class CriticAgent(BaseAgent):
     name = "critic"
 
     def run(self, state: ResearchState) -> ResearchState:
-        """Validate final answer and append findings.
+        """Validate that the final answer cites every collected source."""
 
-        TODO(student): Add fact-check, citation coverage, or hallucination checks.
-        """
-
-        raise StudentTodoError("TODO(student): implement CriticAgent.run")
+        answer = state.final_answer or ""
+        missing = [
+            str(index) for index in range(1, len(state.sources) + 1) if f"[{index}]" not in answer
+        ]
+        if not answer:
+            finding = "Critic: final answer is missing."
+            state.errors.append(finding)
+        elif missing:
+            finding = f"Critic: citations missing for sources {', '.join(missing)}."
+            state.errors.append(finding)
+        else:
+            finding = "Critic: citation coverage check passed."
+        state.add_trace_event("critic", {"finding": finding})
+        return state
